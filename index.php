@@ -29,7 +29,21 @@ Instructor: Brad Best
     <title>Your Card by Misko Valent</title>
 </head>
 <body>
-    <h1>hello</h1>
+  <div class="container">
+    <h1>Magic Card Trick</h1>
+      <h3>Misko will guess your playing card!</h3>
+      <p>Greetings, nothing in life is assured except death and taxes.  Misko will attempt to guess what your playing card is and if correct you will owe him $1 Billion. Sound fair?</p>
+      
+      <h3>Instructions:</h3>
+      <ol>
+        <li>Click on the Shuffle & Deal button.</li>
+        <li>Once the cards are dealt, take a moment, pick a card and remember it.  Don't touch the screen or hover the mouse over it, use your mind only!</li>
+        <li>When you have committed the card to memory, click on the button below the column in which your card is located.  Please select correctly.</li>
+        <li>The cards will be re-dealt, find your card, and select the button below the column that your card is located in.  Again select carefully.</li>
+        <li>One more time.  After the cards are again re-dealt, please select and click the button below the column in which your card is located.  Prepare for the review!</li>
+      </ol>
+    <hr>
+  </div>
 
 
     <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>

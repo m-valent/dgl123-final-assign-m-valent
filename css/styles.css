@@ -1,0 +1,16 @@
+/*
+Title:      Final Assignment
+
+Student:    Misko Valent
+Due Date:   Dec 08, 2021
+Filename:   styles.css
+
+Class:      DGL 123 - Introduction to PHP
+Semester:   2021 Fall North Island College
+Instructor: Brad Best
+*/
+
+body {
+    margin: 30px;
+    background-color: mediumseagreen;
+}
