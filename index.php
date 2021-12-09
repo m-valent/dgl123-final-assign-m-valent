@@ -26,6 +26,8 @@ $card_deck = [
 
 $dealCards = $_POST['deal_cards'] ?? false; //prevents displaying cards until ready
 $shuffleCards = $_POST['shuffle_cards'] ?? false;  //waits displaying cards until ready
+$column = $_POST['column'] ?? 0;
+$round = $_POST['round'] ?? 0; // which pick is it
 
 $cardPath = 'images/cards/';
 
@@ -33,17 +35,46 @@ $numbers = range(0, 8); // number of cards in column
 $cardColumn1 = array(); // will be column of cards
 $cardColumn2 = array();
 $cardColumn3 = array();
+$playingCards = array(); //deck of cards to play with
+$roundValue = array(); // control round of chance
 
 if ($shuffleCards) {
-  shuffle($card_deck); // shuffles the deck of cards
+  shuffle($card_deck); // shuffles the deck of cards when ready to play
+  $numb = range(0, 26); // number of cards in the playing deck
+
+  foreach ($numb as $deck) {
+    $playingCards[] = $card_deck[$deck];
+  }
 }
 
-// this places cards into card columns from shuffled deck
+if ($round == 2) {
+
+  $cardMagic = file_get_contents('playcards.txt');
+  $playingCards = explode("\n", $cardMagic);
+
+  if ($column == 2) {
+    $cardColumn1 = array_slice($playingCards, 9, 9);
+    $cardColumn2 = array_slice($playingCards, 0, 9);
+    $cardColumn3 = array_slice($playingCards, 18, 9);
+  }
+
+  $playingCards = array_replace($cardColumn1);
+    // this places current playing cards into new card columns
 foreach ($numbers as $card) {
-  $cardColumn1[] = $card_deck[$card];
-  $cardColumn2[] = $card_deck[$card + 9];
-  $cardColumn3[] = $card_deck[$card + 18];
+  
+  $playingCards[$card + 9] = $cardColumn2[$card];
+  $playingCards[$card + 18] = $cardColumn3[$card];
 }
+
+}
+
+print_r($cardColumn1);
+echo "<br />";
+print_r($cardColumn2);
+echo "<br />";
+print_r($cardColumn3);
+echo "<br />";
+print_r($playingCards);
 
 ?>
 
@@ -78,8 +109,7 @@ foreach ($numbers as $card) {
     <form name="shuffle_button" action="" method="post">
       <input type="hidden" name="deal_cards" value="true">
       <div class="text-right">
-      <h6>By clicking this button,<br />you accept the challenge!</h6>
-        <!-- <input type="submit" name="shuffle_deal" value="true" placeholder="Shuffle and Deal"> -->
+        <h6>By clicking this button,<br />you accept the challenge!</h6>
         <button type="submit" class="btn btn-primary" name="shuffle_cards" value="true">Shuffle & Deal the Cards</button>
       </div>
     </form>
@@ -88,16 +118,28 @@ foreach ($numbers as $card) {
   <div class="tableTop container">
 
     <br>
-
+    <!-- displaying cards -->
     <div class="row">
 
       <div class="col text-center">
         <?php
-        for ($i = 0; $i < 9; $i++) {
-          if($dealCards) {
-          echo "<img src='" . $cardPath . $cardColumn1[$i] . "'>";
+        for ($i = 0; $i < 26; $i += 3) {
+          if ($round == 2) {
+            // echo "Round two pick!";
+            echo "<img src='" . $cardPath . $playingCards[$i] . "'>";
+            $cardColumn1[] = $playingCards[$i];
+          } elseif ($dealCards) {
+            // echo "<img src='" . $cardPath . $cardColumn1[$i] . "'>";
+            echo "<img src='" . $cardPath . $playingCards[$i] . "'>";
+            $cardColumn1[] = $playingCards[$i];
           } else {
-            echo "<img src='images/cards/cover_black.png'>";
+            // echo "<img src='images/cards/cover_black.png'>";
+          }
+        }
+        if ($dealCards) {
+          foreach ($numbers as $card) {
+            $cardSelect = "$cardColumn1[$card]\n";
+            file_put_contents('playCards.txt', $cardSelect, FILE_APPEND);
           }
         }
         ?>
@@ -105,29 +147,84 @@ foreach ($numbers as $card) {
 
       <div class="col text-center">
         <?php
-        for ($i = 0; $i < 9; $i++) {
-          if($dealCards) {
-            echo "<img src='" . $cardPath . $cardColumn2[$i] . "'>";
-            } else {
-              echo "<img src='images/cards/cover_red.png'>";
-            }
+        for ($i = 1; $i < 26; $i += 3) {
+          if ($round == 2) {
+            // echo "Round two pick!";
+            echo "<img src='" . $cardPath . $playingCards[$i] . "'>";
+            $cardColumn2[] = $playingCards[$i];
+          } elseif ($dealCards) {
+            // echo "<img src='" . $cardPath . $cardColumn2[$i] . "'>";
+            echo "<img src='" . $cardPath . $playingCards[$i] . "'>";
+            $cardColumn2[] = $playingCards[$i];
+          } else {
+            // echo "<img src='images/cards/cover_red.png'>";
+          }
         }
+        if ($dealCards) {
+          foreach ($numbers as $card) {
+            $cardSelect = "$cardColumn2[$card]\n";
+            file_put_contents('playCards.txt', $cardSelect, FILE_APPEND);
+          }
+        }
+
         ?>
       </div>
 
       <div class="col text-center">
         <?php
-        for ($i = 0; $i < 9; $i++) {
-          if($dealCards) {
-            echo "<img src='" . $cardPath . $cardColumn3[$i] . "'>";
-            } else {
-              echo "<img src='images/cards/cover_black.png'>";
-            }        }
+        for ($i = 2; $i <= 26; $i += 3) {
+          if ($round == 2) {
+            // echo "Round two pick!";
+            echo "<img src='" . $cardPath . $playingCards[$i] . "'>";
+            $cardColumn3[] = $playingCards[$i];
+          } elseif ($dealCards) {
+            // echo "<img src='" . $cardPath . $cardColumn3[$i] . "'>";
+            echo "<img src='" . $cardPath . $playingCards[$i] . "'>";
+            $cardColumn3[] = $playingCards[$i];
+          } else {
+            // echo "<img src='images/cards/cover_black.png'>";
+          }
+        }
+        if ($dealCards) {
+          foreach ($numbers as $card) {
+            $cardSelect = "$cardColumn3[$card]\n";
+            file_put_contents('playCards.txt', $cardSelect, FILE_APPEND);
+          }
+        }
+
         ?>
       </div>
 
-    </div> <!-- row end -->
+    </div> <!-- row end displaying cards -->
 
+
+
+    <form name="pick_column" action="" method="post">
+      <input type="hidden" name="round" value="2">
+
+      <?php
+
+      $display = 'd-none'; // to not display the buttons until ready
+
+      if ($dealCards == true or $round == 2 or $round == 3) {
+        $display = '';
+      }
+
+      ?>
+      <div class="row mt-2 <?php echo $display; ?>">
+        <div class="col text-center">
+          <button type="submit" class="btn btn-warning" name="column" value="1">Card is above</button>
+        </div>
+
+        <div class="col text-center">
+          <button type="submit" class="btn btn-warning" name="column" value="2">Card is above</button>
+        </div>
+
+        <div class="col text-center">
+          <button type="submit" class="btn btn-warning" name="column" value="3">Card is above</button>
+        </div>
+      </div>
+    </form>
 
     <br>
 

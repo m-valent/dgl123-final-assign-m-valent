@@ -13,3 +13,25 @@
     <img src="<?php echo $cardPath . $cardColumn1[1] ?>" alt="">
     <br>
     <img src="<?php echo $cardPath . $cardColumn1[2] ?>" alt="">
+
+
+    
+          <!-- <?php
+                "<per>";
+                print_r($cardColumn2);
+                "</per>";
+                ?> -->
+
+// this places cards into card columns from shuffled deck
+// foreach ($numbers as $card) {
+//   $cardColumn1[] = $card_deck[$card];
+//   $cardColumn2[] = $card_deck[$card + 9];
+//   $cardColumn3[] = $card_deck[$card + 18];
+// }
+
+// $numb = range(0, 26); // number of cards in the playing deck
+
+// foreach ($numb as $deck) {
+//   $playingCards[] = $card_deck[$deck];
+// }
+
