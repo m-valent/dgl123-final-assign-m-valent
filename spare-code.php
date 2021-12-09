@@ -35,3 +35,25 @@
 //   $playingCards[] = $card_deck[$deck];
 // }
 
+
+if($round == 2) {
+          foreach ($numbers as $card) {
+            $cardSelect = "$cardColumn1[$card]\n";
+            file_put_contents('playCards.txt', $cardSelect, FILE_APPEND);
+          }
+
+        } elseif
+
+
+        if ($round == 2) {
+          foreach ($numbers as $card) {
+            $cardSelect = "$cardColumn3[$card]\n";
+            file_put_contents('playCards.txt', $cardSelect, FILE_APPEND);
+          }
+        } elseif ($round == 1) {
+          foreach ($numbers as $card) {
+            $cardSelect = "$cardColumn3[$card]\n";
+            file_put_contents('playCards.txt', $cardSelect, FILE_APPEND);
+          }
+        } else
+
