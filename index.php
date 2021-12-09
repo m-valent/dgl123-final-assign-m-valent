@@ -29,8 +29,8 @@ $shuffleCards = $_POST['shuffle_cards'] ?? false;  //waits displaying cards unti
 $column = $_POST['column'] ?? 0;
 $round = $_POST['round'] ?? 0; // which pick is it
 
-var_dump($column);
-var_dump($round);
+// var_dump($column);
+// var_dump($round);
 
 $cardPath = 'images/cards/';
 
@@ -139,13 +139,13 @@ if ($round == 1) {
 //   file_put_contents('playCards02.txt', $cardSelect, FILE_APPEND);
 // }
 
-print_r($cardColumn1);
-echo "<br />";
-print_r($cardColumn2);
-echo "<br />";
-print_r($cardColumn3);
-echo "<br />";
-print_r($playingCards);
+// print_r($cardColumn1);
+// echo "<br />";
+// print_r($cardColumn2);
+// echo "<br />";
+// print_r($cardColumn3);
+// echo "<br />";
+// print_r($playingCards);
 
 ?>
 
