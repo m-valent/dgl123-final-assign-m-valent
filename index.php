@@ -24,7 +24,9 @@ $card_deck = [
   'spad_01_A.png', 'spad_02.png', 'spad_03.png', 'spad_04.png', 'spad_05.png', 'spad_06.png', 'spad_07.png', 'spad_08.png', 'spad_09.png', 'spad_10_T.png', 'spad_11_J.png', 'spad_12_Q.png', 'spad_13_K.png'
 ];
 
-$dealCards = true; // to be used to trigger shuffling deck
+$dealCards = $_POST['deal_cards'] ?? false; //prevents displaying cards until ready
+$shuffleCards = $_POST['shuffle_cards'] ?? false;  //waits displaying cards until ready
+
 $cardPath = 'images/cards/';
 
 $numbers = range(0, 8); // number of cards in column
@@ -32,8 +34,8 @@ $cardColumn1 = array(); // will be column of cards
 $cardColumn2 = array();
 $cardColumn3 = array();
 
-if ($dealCards) {
-shuffle($card_deck); // shuffles the deck of cards
+if ($shuffleCards) {
+  shuffle($card_deck); // shuffles the deck of cards
 }
 
 // this places cards into card columns from shuffled deck
@@ -72,10 +74,19 @@ foreach ($numbers as $card) {
         <li>The cards will be re-dealt, find your card, and select the button below the column that your card is located in.  Again select carefully.</li>
         <li>One more time.  After the cards are again re-dealt, please select and click the button below the column in which your card is located.  Prepare for the review!</li>
       </ol> -->
+
+    <form name="shuffle_button" action="" method="post">
+      <input type="hidden" name="deal_cards" value="true">
+      <div class="text-right">
+      <h6>By clicking this button,<br />you accept the challenge!</h6>
+        <!-- <input type="submit" name="shuffle_deal" value="true" placeholder="Shuffle and Deal"> -->
+        <button type="submit" class="btn btn-primary" name="shuffle_cards" value="true">Shuffle & Deal the Cards</button>
+      </div>
+    </form>
     <hr>
   </div>
   <div class="tableTop container">
-    
+
     <br>
 
     <div class="row">
@@ -83,7 +94,11 @@ foreach ($numbers as $card) {
       <div class="col text-center">
         <?php
         for ($i = 0; $i < 9; $i++) {
+          if($dealCards) {
           echo "<img src='" . $cardPath . $cardColumn1[$i] . "'>";
+          } else {
+            echo "<img src='images/cards/cover_black.png'>";
+          }
         }
         ?>
       </div>
@@ -91,7 +106,11 @@ foreach ($numbers as $card) {
       <div class="col text-center">
         <?php
         for ($i = 0; $i < 9; $i++) {
-          echo "<img src='" . $cardPath . $cardColumn2[$i] . "'>";
+          if($dealCards) {
+            echo "<img src='" . $cardPath . $cardColumn2[$i] . "'>";
+            } else {
+              echo "<img src='images/cards/cover_red.png'>";
+            }
         }
         ?>
       </div>
@@ -99,8 +118,11 @@ foreach ($numbers as $card) {
       <div class="col text-center">
         <?php
         for ($i = 0; $i < 9; $i++) {
-          echo "<img src='" . $cardPath . $cardColumn3[$i] . "'>";
-        }
+          if($dealCards) {
+            echo "<img src='" . $cardPath . $cardColumn3[$i] . "'>";
+            } else {
+              echo "<img src='images/cards/cover_black.png'>";
+            }        }
         ?>
       </div>
 
