@@ -29,10 +29,18 @@ $shuffleCards = $_POST['shuffle_cards'] ?? false;  //waits displaying cards unti
 $column = $_POST['column'] ?? 0;
 $round = $_POST['round'] ?? 0; // which pick is it
 
+echo "from the top - var dealCards: ";
 var_dump($dealCards);
+echo "<br />";
+echo "from the top - var shuffleCards: ";
 var_dump($shuffleCards);
+echo "<br />";
+echo "from the top - var column: ";
 var_dump($column);
+echo "<br />";
+echo "from the top - var round: ";
 var_dump($round);
+echo "<br />";
 
 $cardPath = 'images/cards/';
 
@@ -43,14 +51,22 @@ $cardColumn3 = array();
 $playingCards = array(); //deck of cards to play with
 $roundValue = array(); // control round of chance
 
-echo "<p>from the top - col 1</p<br /> ";
+echo "<br />";
+echo "from the top - col 1: ";
 print_r($cardColumn1);
-echo "<p>from the top - col 2</p<br /> ";
+echo "<br />";
+echo "<br />";
+echo "from the top - col 2: ";
 print_r($cardColumn2);
-echo "<p>from the top - col 3</p<br /> ";
+echo "<br />";
+echo "<br />";
+echo "from the top - col 3: ";
 print_r($cardColumn3);
-echo "<p>from the top - deck</p<br /> ";
+echo "<br />";
+echo "<br />";
+echo "from the top - playingCards: ";
 print_r($playingCards);
+echo "<br />";
 
 if ($shuffleCards) {
   shuffle($card_deck); // shuffles the deck of cards when ready to play
@@ -59,6 +75,11 @@ if ($shuffleCards) {
   foreach ($numb as $deck) {
     $playingCards[] = $card_deck[$deck];
   }
+
+  echo "<br />";
+  echo "after shuffle - playingCards: ";
+  print_r($playingCards);
+  echo "<br />";
 }
 
 // if ($round == 3) {
@@ -104,25 +125,42 @@ if ($shuffleCards) {
 
 // } else
 
-if ($round == 1) {
+if ($round == 2) {
 
   $cardMagic = file_get_contents('playcards.txt');
   $playingCards = explode("\n", $cardMagic);
 
 
-  echo "<br /> after round 1";
+  echo "<br / >BEGIN round 1 - var dealCards: ";
+  var_dump($dealCards);
+  echo "<br />";
+  echo "BEGIN round 2 - var shuffleCards: ";
+  var_dump($shuffleCards);
+  echo "<br />";
+  echo "BEGIN round 2 - var column: ";
+  var_dump($column);
+  echo "<br />";
+  echo "BEGIN round 2 - var round: ";
+  var_dump($round);
+  echo "<br />";
+
+  echo "<br />BEGIN round 2 col01: ";
   print_r($cardColumn1);
   echo "<br />";
+  echo "<br />BEGIN round 2 col02: ";
   print_r($cardColumn2);
   echo "<br />";
+  echo "<br />BEGIN round 2 col02: ";
   print_r($cardColumn3);
-  echo "<br /> after get contents";
+  echo "<br />";
+  echo "<br />BEGIN round 2 contents playingCards: ";
   print_r($playingCards);
+  echo "<br />";
 
   if ($column == 3) {
     $cardColumn1 = array_slice($playingCards, 18, 9);
-    $cardColumn2 = array_slice($playingCards, 0, 9);
-    $cardColumn3 = array_slice($playingCards, 9, 9);
+    $cardColumn2 = array_slice($playingCards, 9, 9);
+    $cardColumn3 = array_slice($playingCards, 0, 9);
 
     $playingCards = array_replace($cardColumn1);
     // this places current playing cards into new card columns
@@ -131,9 +169,9 @@ if ($round == 1) {
       $playingCards[$card + 18] = $cardColumn3[$card];
     }
 
-    echo "<br /> after col-3 reshuffle";
+    echo "<br /> after round 2, col-3 reshuffle:";
     print_r($playingCards);
-
+    echo "<br />";
   }
 } elseif ($column == 2) {
   $cardColumn1 = array_slice($playingCards, 9, 9);
@@ -143,24 +181,57 @@ if ($round == 1) {
   $playingCards = array_replace($cardColumn1);
   // this places current playing cards into new card columns
   foreach ($numbers as $card) {
-    $playingCards[$card + 9] = $cardColumn2[$card];
+    $playingCards[$card + 9] = $cardColumn1[$card];
     $playingCards[$card + 18] = $cardColumn3[$card];
   }
-} elseif ($column == 1) {
-  $cardColumn1 = array_slice($playingCards, 0, 9);
-  $cardColumn2 = array_slice($playingCards, 9, 9);
-  $cardColumn3 = array_slice($playingCards, 18, 9);
 
-  $playingCards = array_replace($cardColumn1);
+  echo "<br /> after round 2, col-2 reshuffle:";
+  print_r($playingCards);
+  echo "<br />";
+
+
+// } elseif ($column == 1) {
+//   $cardColumn1 = array_slice($playingCards, 0, 9);
+//   $cardColumn2 = array_slice($playingCards, 9, 9);
+//   $cardColumn3 = array_slice($playingCards, 18, 9);
+
+  // $playingCards = arr?ay_replace($cardColumn1);
   // this places current playing cards into new card columns
-  foreach ($numbers as $card) {
-    $playingCards[$card + 9] = $cardColumn2[$card];
-    $playingCards[$card + 18] = $cardColumn3[$card];
-  }
+  // foreach ($numbers as $card) {
+  //   $playingCards[$card] = $cardColumn1[$card];
+  //   $playingCards[$card + 9] = $cardColumn2[$card];
+  //   $playingCards[$card + 18] = $cardColumn3[$card];
+  // }
+
+  echo "<br / >AFTER round 2 - var dealCards: ";
+  var_dump($dealCards);
+  echo "<br />";
+  echo "AFTER round 2 - var shuffleCards: ";
+  var_dump($shuffleCards);
+  echo "<br />";
+  echo "AFTER round 2 - var column: ";
+  var_dump($column);
+  echo "<br />";
+  echo "AFTER round 2 - var round: ";
+  var_dump($round);
+  echo "<br />";
+
+  echo "<br />AFTER round 2 col01: ";
+  print_r($cardColumn1);
+  echo "<br />";
+  echo "<br />AFTER round 2 col02: ";
+  print_r($cardColumn2);
+  echo "<br />";
+  echo "<br />AFTER round 2 col02: ";
+  print_r($cardColumn3);
+  echo "<br />";
 }
+  echo "<br />CURRENT & AFTER RESHUFFLE contents playingCards: ";
+  print_r($playingCards);
+  echo "<br />";
 
 // foreach ($playingCards as $deck) {
-//   $cardSelect = "$cardColumn3[$deck]\n";
+//   $cardSelect = "$cardColumn[$deck]\n";
 //   file_put_contents('playCards02.txt', $cardSelect, FILE_APPEND);
 // }
 
@@ -215,13 +286,13 @@ if ($round == 1) {
       <div class="col text-center">
         <?php
         for ($i = 0; $i < 26; $i += 3) {
-          if ($round == 2) {
+          if ($round == 3) {
             echo "<img src='" . $cardPath . $playingCards[$i] . "'>";
             $cardColumn1[] = $playingCards[$i];
-          } elseif ($round == 1) {
+          } elseif ($round == 2) {
             // echo "Round two pick!";
-            echo "<img src='" . $cardPath . $playingCards[$i + 26] . "'>";
-            $cardColumn1[] = $playingCards[$i + 26];
+            echo "<img src='" . $cardPath . $playingCards[$i] . "'>";
+            $cardColumn1[] = $playingCards[$i];
           } elseif ($dealCards) {
             // echo "<img src='" . $cardPath . $cardColumn1[$i] . "'>";
             echo "<img src='" . $cardPath . $playingCards[$i] . "'>";
@@ -231,12 +302,12 @@ if ($round == 1) {
           }
         }
 
-        if ($round == 2) {
+        if ($round == 3) {
           foreach ($numbers as $card) {
             $cardSelect = "$cardColumn1[$card]\n";
-            file_put_contents('playCards.txt', $cardSelect, FILE_APPEND);
+            file_put_contents('playCards03.txt', $cardSelect, FILE_APPEND);
           }
-        } elseif ($round == 1) {
+        } elseif ($round == 2) {
           foreach ($numbers as $card) {
             $cardSelect = "$cardColumn1[$card]\n";
             file_put_contents('playCards02.txt', $cardSelect, FILE_APPEND);
@@ -253,13 +324,13 @@ if ($round == 1) {
       <div class="col text-center">
         <?php
         for ($i = 1; $i < 26; $i += 3) {
-          if ($round == 2) {
+          if ($round == 3) {
             echo "<img src='" . $cardPath . $playingCards[$i] . "'>";
             $cardColumn2[] = $playingCards[$i];
-          } elseif ($round == 1) {
+          } elseif ($round == 2) {
             // echo "Round two pick!";
-            echo "<img src='" . $cardPath . $playingCards[$i + 26] . "'>";
-            $cardColumn2[] = $playingCards[$i + 26];
+            echo "<img src='" . $cardPath . $playingCards[$i] . "'>";
+            $cardColumn2[] = $playingCards[$i];
           } elseif ($dealCards) {
             // echo "<img src='" . $cardPath . $cardColumn2[$i] . "'>";
             echo "<img src='" . $cardPath . $playingCards[$i] . "'>";
@@ -269,12 +340,12 @@ if ($round == 1) {
           }
         }
 
-        if ($round == 2) {
+        if ($round == 3) {
           foreach ($numbers as $card) {
             $cardSelect = "$cardColumn2[$card]\n";
-            file_put_contents('playCards.txt', $cardSelect, FILE_APPEND);
+            file_put_contents('playCards03.txt', $cardSelect, FILE_APPEND);
           }
-        } elseif ($round == 1) {
+        } elseif ($round == 2) {
           foreach ($numbers as $card) {
             $cardSelect = "$cardColumn2[$card]\n";
             file_put_contents('playCards02.txt', $cardSelect, FILE_APPEND);
@@ -292,13 +363,13 @@ if ($round == 1) {
       <div class="col text-center">
         <?php
         for ($i = 2; $i <= 26; $i += 3) {
-          if ($round == 2) {
+          if ($round == 3) {
             echo "<img src='" . $cardPath . $playingCards[$i] . "'>";
             $cardColumn2[] = $playingCards[$i];
-          } elseif ($round == 1) {
+          } elseif ($round == 2) {
             // echo "Round two pick!";
-            echo "<img src='" . $cardPath . $playingCards[$i + 26] . "'>";
-            $cardColumn3[] = $playingCards[$i + 26];
+            echo "<img src='" . $cardPath . $playingCards[$i] . "'>";
+            $cardColumn3[] = $playingCards[$i];
           } elseif ($dealCards) {
             // echo "<img src='" . $cardPath . $cardColumn3[$i] . "'>";
             echo "<img src='" . $cardPath . $playingCards[$i] . "'>";
@@ -308,12 +379,12 @@ if ($round == 1) {
           }
         }
 
-        if ($round == 2) {
+        if ($round == 3) {
           foreach ($numbers as $card) {
             $cardSelect = "$cardColumn3[$card]\n";
-            file_put_contents('playCards.txt', $cardSelect, FILE_APPEND);
+            file_put_contents('playCards03.txt', $cardSelect, FILE_APPEND);
           }
-        } elseif ($round == 1) {
+        } elseif ($round == 2) {
           foreach ($numbers as $card) {
             $cardSelect = "$cardColumn3[$card]\n";
             file_put_contents('playCards02.txt', $cardSelect, FILE_APPEND);
@@ -335,17 +406,12 @@ if ($round == 1) {
     <form name="pick_column" action="" method="post">
 
       <?php
-      var_dump($dealCards);
-      var_dump($shuffleCards);
-      var_dump($column);
-      var_dump($round);
-
+  
       if ($round == 2) {
         $value = '3';
       } elseif ($dealCards == true or $round == 1) {
         $value = '2';
       }
-      $value = '1';
       ?>
 
       <input type="hidden" name="round" value="<?php echo $value; ?>">
@@ -374,19 +440,37 @@ if ($round == 1) {
       </div>
       <br>
       <?php
+
+      echo "at bottom end - var dealCards: ";
       var_dump($dealCards);
+      echo "<br />";
+      echo "at bottom end - var shuffleCards: ";
       var_dump($shuffleCards);
+      echo "<br />";
+      echo "at bottom end - var column: ";
       var_dump($column);
+      echo "<br />";
+      echo "at bottom end - var round: ";
       var_dump($round);
+      echo "<br />";
 
       echo "<br />";
+      echo "at bottom end - col 1: ";
       print_r($cardColumn1);
       echo "<br />";
+      echo "<br />";
+      echo "at bottom end - col 2: ";
       print_r($cardColumn2);
       echo "<br />";
+      echo "<br />";
+      echo "at bottom end - col 3: ";
       print_r($cardColumn3);
       echo "<br />";
+      echo "<br />";
+      echo "<p>at bottom end - playingCards: ";
       print_r($playingCards);
+      echo "<br />";
+
       ?>
     </form>
 
