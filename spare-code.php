@@ -57,3 +57,29 @@ if($round == 2) {
           }
         } else
 
+        // elseif ($column == 1) {
+//   $cardColumn1 = array_slice($playingCards, 0, 9);
+//   $cardColumn2 = array_slice($playingCards, 9, 9);
+//   $cardColumn3 = array_slice($playingCards, 18, 9);
+
+//   $playingCards = array_replace($cardColumn1);
+  // this places current playing cards into new card columns
+  // foreach ($numbers as $card) {
+  //   $playingCards[$card + 9] = $cardColumn2[$card];
+  //   $playingCards[$card + 18] = $cardColumn3[$card];
+  // }
+
+
+  
+// } elseif ($column == 1) {
+//   $cardColumn1 = array_slice($playingCards, 0, 9);
+//   $cardColumn2 = array_slice($playingCards, 9, 9);
+//   $cardColumn3 = array_slice($playingCards, 18, 9);
+
+  // $playingCards = arr?ay_replace($cardColumn1);
+  // this places current playing cards into new card columns
+  // foreach ($numbers as $card) {
+  //   $playingCards[$card] = $cardColumn1[$card];
+  //   $playingCards[$card + 9] = $cardColumn2[$card];
+  //   $playingCards[$card + 18] = $cardColumn3[$card];
+  // }

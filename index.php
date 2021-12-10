@@ -54,15 +54,15 @@ $roundValue = array(); // control round of chance
 echo "<br />";
 echo "from the top - col 1: ";
 print_r($cardColumn1);
-echo "<br />";
+
 echo "<br />";
 echo "from the top - col 2: ";
 print_r($cardColumn2);
-echo "<br />";
+
 echo "<br />";
 echo "from the top - col 3: ";
 print_r($cardColumn3);
-echo "<br />";
+
 echo "<br />";
 echo "from the top - playingCards: ";
 print_r($playingCards);
@@ -82,60 +82,64 @@ if ($shuffleCards) {
   echo "<br />";
 }
 
-// if ($round == 3) {
+if ($round == 3) {
 
-//   $cardMagic = file_get_contents('playcards02.txt');
-//   $playingCards = explode("\n", $cardMagic);
+  $cardMagic = file_get_contents('playcards02.txt');
+  $playingCards = explode("\n", $cardMagic);
+  // bring in the deck of playing cards
 
-//   if ($column == 3) {
-//     $cardColumn1 = array_slice($playingCards, 18, 9);
-//     $cardColumn2 = array_slice($playingCards, 9, 9);
-//     $cardColumn3 = array_slice($playingCards, 0, 9);
+  echo "<br />";
+  echo "BEGIN round 3 - var column: ";
+  var_dump($column);
+  echo "<br />";
+  echo "BEGIN round 3 - var round: ";
+  var_dump($round);
+ 
+  echo "<br />BEGIN round 3 contents playingCards: ";
+  print_r($playingCards);
+  echo "<br />";
 
-//     $playingCards = array_replace($cardColumn1);
-//     // this places current playing cards into new card columns
-//     foreach ($numbers as $card) {
-//       $playingCards[$card + 9] = $cardColumn2[$card];
-//       $playingCards[$card + 18] = $cardColumn3[$card];
-//     }
-//   }
-// } elseif ($column == 2) {
-//   $cardColumn1 = array_slice($playingCards, 18, 9);
-//   $cardColumn2 = array_slice($playingCards, 0, 9);
-//   $cardColumn3 = array_slice($playingCards, 9, 9);
+  if ($column == 3) {
+    $cardColumn1 = array_slice($playingCards, 18, 9);
+    $cardColumn2 = array_slice($playingCards, 9, 9);
+    $cardColumn3 = array_slice($playingCards, 0, 9);
 
-//   $playingCards = array_replace($cardColumn1);
-//   // this places current playing cards into new card columns
-//   foreach ($numbers as $card) {
-//     $playingCards[$card + 9] = $cardColumn2[$card];
-//     $playingCards[$card + 18] = $cardColumn3[$card];
-//   }
-// } elseif ($column == 1) {
-//   $cardColumn1 = array_slice($playingCards, 0, 9);
-//   $cardColumn2 = array_slice($playingCards, 9, 9);
-//   $cardColumn3 = array_slice($playingCards, 18, 9);
+    $playingCards = array_replace($cardColumn1);
+    // this places current playing cards into new card columns
+    foreach ($numbers as $card) {
+      $playingCards[$card + 9] = $cardColumn2[$card];
+      $playingCards[$card + 18] = $cardColumn3[$card];
+    }
 
-//   $playingCards = array_replace($cardColumn1);
-//   // this places current playing cards into new card columns
-//   foreach ($numbers as $card) {
-//     $playingCards[$card + 9] = $cardColumn2[$card];
-//     $playingCards[$card + 18] = $cardColumn3[$card];
-//   }
+    echo "<br /> after round 3, col-3 reshuffle:";
+    print_r($playingCards);
+    echo "<br />";
+
+  } elseif ($column == 2) {
+  $cardColumn1 = array_slice($playingCards, 18, 9);
+  $cardColumn2 = array_slice($playingCards, 0, 9);
+  $cardColumn3 = array_slice($playingCards, 9, 9);
+
+  $playingCards = array_replace($cardColumn1);
+  // this places current playing cards into new card columns
+  foreach ($numbers as $card) {
+    $playingCards[$card + 9] = $cardColumn2[$card];
+    $playingCards[$card + 18] = $cardColumn3[$card];
+  }
+  echo "<br /> after round 3, col-2 reshuffle:";
+    print_r($playingCards);
+    echo "<br />";
+    
+} 
 
 
-// } else
 
-if ($round == 2) {
+} elseif ($round == 2) {
 
   $cardMagic = file_get_contents('playcards.txt');
   $playingCards = explode("\n", $cardMagic);
+// bring in the deck of playing cards
 
-
-  echo "<br / >BEGIN round 1 - var dealCards: ";
-  var_dump($dealCards);
-  echo "<br />";
-  echo "BEGIN round 2 - var shuffleCards: ";
-  var_dump($shuffleCards);
   echo "<br />";
   echo "BEGIN round 2 - var column: ";
   var_dump($column);
@@ -144,14 +148,6 @@ if ($round == 2) {
   var_dump($round);
   echo "<br />";
 
-  echo "<br />BEGIN round 2 col01: ";
-  print_r($cardColumn1);
-  echo "<br />";
-  echo "<br />BEGIN round 2 col02: ";
-  print_r($cardColumn2);
-  echo "<br />";
-  echo "<br />BEGIN round 2 col02: ";
-  print_r($cardColumn3);
   echo "<br />";
   echo "<br />BEGIN round 2 contents playingCards: ";
   print_r($playingCards);
@@ -173,7 +169,7 @@ if ($round == 2) {
     print_r($playingCards);
     echo "<br />";
   }
-} elseif ($column == 2) {
+elseif ($column == 2) {
   $cardColumn1 = array_slice($playingCards, 9, 9);
   $cardColumn2 = array_slice($playingCards, 0, 9);
   $cardColumn3 = array_slice($playingCards, 18, 9);
@@ -181,60 +177,40 @@ if ($round == 2) {
   $playingCards = array_replace($cardColumn1);
   // this places current playing cards into new card columns
   foreach ($numbers as $card) {
-    $playingCards[$card + 9] = $cardColumn1[$card];
+    $playingCards[$card + 9] = $cardColumn2[$card];
     $playingCards[$card + 18] = $cardColumn3[$card];
   }
 
   echo "<br /> after round 2, col-2 reshuffle:";
   print_r($playingCards);
   echo "<br />";
-
-
-// } elseif ($column == 1) {
-//   $cardColumn1 = array_slice($playingCards, 0, 9);
-//   $cardColumn2 = array_slice($playingCards, 9, 9);
-//   $cardColumn3 = array_slice($playingCards, 18, 9);
-
-  // $playingCards = arr?ay_replace($cardColumn1);
-  // this places current playing cards into new card columns
-  // foreach ($numbers as $card) {
-  //   $playingCards[$card] = $cardColumn1[$card];
-  //   $playingCards[$card + 9] = $cardColumn2[$card];
-  //   $playingCards[$card + 18] = $cardColumn3[$card];
-  // }
-
-  echo "<br / >AFTER round 2 - var dealCards: ";
-  var_dump($dealCards);
+}
+echo "<br /> after round 2, col-1 reshuffle:";
+  print_r($playingCards);
   echo "<br />";
-  echo "AFTER round 2 - var shuffleCards: ";
-  var_dump($shuffleCards);
+}
+  
   echo "<br />";
-  echo "AFTER round 2 - var column: ";
+  echo "CURRENT PHP  - var column: ";
   var_dump($column);
   echo "<br />";
-  echo "AFTER round 2 - var round: ";
+  echo "CURRENT PHP  - var round: ";
   var_dump($round);
   echo "<br />";
 
-  echo "<br />AFTER round 2 col01: ";
+  echo "<br />CURRENT PHP col01: ";
   print_r($cardColumn1);
-  echo "<br />";
-  echo "<br />AFTER round 2 col02: ";
+ 
+  echo "<br />CURRENT PHP col02: ";
   print_r($cardColumn2);
-  echo "<br />";
-  echo "<br />AFTER round 2 col02: ";
+  
+  echo "<br />CURRENT PHP col02: ";
   print_r($cardColumn3);
   echo "<br />";
-}
-  echo "<br />CURRENT & AFTER RESHUFFLE contents playingCards: ";
+
+  echo "<br />CURRENT PHP contents playingCards: ";
   print_r($playingCards);
   echo "<br />";
-
-// foreach ($playingCards as $deck) {
-//   $cardSelect = "$cardColumn[$deck]\n";
-//   file_put_contents('playCards02.txt', $cardSelect, FILE_APPEND);
-// }
-
 
 ?>
 
@@ -270,7 +246,7 @@ if ($round == 2) {
       <input type="hidden" name="deal_cards" value="true">
       <div class="text-right">
         <h6>By clicking this button,<br />you accept the challenge!</h6>
-        <!-- <input type="hidden" name="round" value="0"> -->
+        <input type="hidden" name="round" value="1">
 
         <button type="submit" class="btn btn-primary" name="shuffle_cards" value="true">Shuffle & Deal the Cards</button>
       </div>
@@ -365,7 +341,7 @@ if ($round == 2) {
         for ($i = 2; $i <= 26; $i += 3) {
           if ($round == 3) {
             echo "<img src='" . $cardPath . $playingCards[$i] . "'>";
-            $cardColumn2[] = $playingCards[$i];
+            $cardColumn3[] = $playingCards[$i];
           } elseif ($round == 2) {
             // echo "Round two pick!";
             echo "<img src='" . $cardPath . $playingCards[$i] . "'>";
