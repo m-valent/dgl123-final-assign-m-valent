@@ -94,18 +94,53 @@ if ($round == 3) {
   echo "<br />";
   echo "BEGIN round 3 - var round: ";
   var_dump($round);
- 
+
   echo "<br />BEGIN round 3 contents playingCards: ";
   print_r($playingCards);
   echo "<br />";
 
+$numbers02 = range(4,9);
+
   if ($column == 3) {
-    $cardColumn1 = array_slice($playingCards, 18, 9);
-    $cardColumn2 = array_slice($playingCards, 9, 9);
-    $cardColumn3 = array_slice($playingCards, 0, 9);
+    $cardColumn1 = array_slice($playingCards, 0, 3);
+    $cardColumn2 = array_slice($playingCards, 3, 3);
+    $cardColumn3 = array_slice($playingCards, 6, 3);
+
+    echo "<br />";
+    echo "round 3 before - col 1: ";
+    print_r($cardColumn1);
+    
+    echo "<br />";
+    echo "round 3 before - col 2: ";
+    print_r($cardColumn2);
+    
+    echo "<br />";
+    echo "round 3 before - col 3: ";
+    print_r($cardColumn3);
+    echo "<br />";
+
+    for ($i = 0; $i < 6; $i += 1) {
+$cardColumn1[$i+3] = $playingCards[$i + 9];
+$cardColumn2[$i+3] = $playingCards[$i + 12];
+$cardColumn3[$i+3] = $playingCards[$i + 21];
+
+}
+
+echo "<br />";
+echo "round 3 AFTER - col 1: ";
+print_r($cardColumn1);
+
+echo "<br />";
+echo "round 3 AFTER - col 2: ";
+print_r($cardColumn2);
+
+echo "<br />";
+echo "round 3 AFTER - col 3: ";
+print_r($cardColumn3);
+echo "<br />";
 
     $playingCards = array_replace($cardColumn1);
-    // this places current playing cards into new card columns
+    // this SHUFFLES playing cards into new card columns
     foreach ($numbers as $card) {
       $playingCards[$card + 9] = $cardColumn2[$card];
       $playingCards[$card + 18] = $cardColumn3[$card];
@@ -116,29 +151,25 @@ if ($round == 3) {
     echo "<br />";
 
   } elseif ($column == 2) {
-  $cardColumn1 = array_slice($playingCards, 18, 9);
-  $cardColumn2 = array_slice($playingCards, 0, 9);
-  $cardColumn3 = array_slice($playingCards, 9, 9);
+    $cardColumn1 = array_slice($playingCards, 0, 9);
+    $cardColumn2 = array_slice($playingCards, 9, 9);
+    $cardColumn3 = array_slice($playingCards, 18, 9);
 
-  $playingCards = array_replace($cardColumn1);
-  // this places current playing cards into new card columns
-  foreach ($numbers as $card) {
-    $playingCards[$card + 9] = $cardColumn2[$card];
-    $playingCards[$card + 18] = $cardColumn3[$card];
-  }
-  echo "<br /> after round 3, col-2 reshuffle:";
+    $playingCards = array_replace($cardColumn1);
+    // this places current playing cards into new card columns
+    foreach ($numbers as $card) {
+      $playingCards[$card + 9] = $cardColumn2[$card];
+      $playingCards[$card + 18] = $cardColumn3[$card];
+    }
+    echo "<br /> after round 3, col-2 reshuffle:";
     print_r($playingCards);
     echo "<br />";
-    
-} 
-
-
-
+  }
 } elseif ($round == 2) {
 
   $cardMagic = file_get_contents('playcards.txt');
   $playingCards = explode("\n", $cardMagic);
-// bring in the deck of playing cards
+  // bring in the deck of playing cards
 
   echo "<br />";
   echo "BEGIN round 2 - var column: ";
@@ -168,49 +199,46 @@ if ($round == 3) {
     echo "<br /> after round 2, col-3 reshuffle:";
     print_r($playingCards);
     echo "<br />";
+  } elseif ($column == 2) {
+    $cardColumn1 = array_slice($playingCards, 9, 9);
+    $cardColumn2 = array_slice($playingCards, 0, 9);
+    $cardColumn3 = array_slice($playingCards, 18, 9);
+
+    $playingCards = array_replace($cardColumn1);
+    // this places current playing cards into new card columns
+    foreach ($numbers as $card) {
+      $playingCards[$card + 9] = $cardColumn2[$card];
+      $playingCards[$card + 18] = $cardColumn3[$card];
+    }
+
+    echo "<br /> after round 2, col-2 reshuffle:";
+    print_r($playingCards);
+    echo "<br />";
   }
-elseif ($column == 2) {
-  $cardColumn1 = array_slice($playingCards, 9, 9);
-  $cardColumn2 = array_slice($playingCards, 0, 9);
-  $cardColumn3 = array_slice($playingCards, 18, 9);
-
-  $playingCards = array_replace($cardColumn1);
-  // this places current playing cards into new card columns
-  foreach ($numbers as $card) {
-    $playingCards[$card + 9] = $cardColumn2[$card];
-    $playingCards[$card + 18] = $cardColumn3[$card];
-  }
-
-  echo "<br /> after round 2, col-2 reshuffle:";
-  print_r($playingCards);
-  echo "<br />";
-}
-echo "<br /> after round 2, col-1 reshuffle:";
-  print_r($playingCards);
-  echo "<br />";
-}
   
-  echo "<br />";
-  echo "CURRENT PHP  - var column: ";
-  var_dump($column);
-  echo "<br />";
-  echo "CURRENT PHP  - var round: ";
-  var_dump($round);
-  echo "<br />";
+}
 
-  echo "<br />CURRENT PHP col01: ";
-  print_r($cardColumn1);
- 
-  echo "<br />CURRENT PHP col02: ";
-  print_r($cardColumn2);
-  
-  echo "<br />CURRENT PHP col02: ";
-  print_r($cardColumn3);
-  echo "<br />";
+echo "<br />";
+echo "CURRENT PHP  - var column: ";
+var_dump($column);
+echo "<br />";
+echo "CURRENT PHP  - var round: ";
+var_dump($round);
+echo "<br />";
 
-  echo "<br />CURRENT PHP contents playingCards: ";
-  print_r($playingCards);
-  echo "<br />";
+echo "<br />CURRENT PHP col01: ";
+print_r($cardColumn1);
+
+echo "<br />CURRENT PHP col02: ";
+print_r($cardColumn2);
+
+echo "<br />CURRENT PHP col02: ";
+print_r($cardColumn3);
+echo "<br />";
+
+echo "<br />CURRENT PHP contents playingCards: ";
+print_r($playingCards);
+echo "<br />";
 
 ?>
 
@@ -258,7 +286,8 @@ echo "<br /> after round 2, col-1 reshuffle:";
     <br>
     <!-- displaying cards -->
     <div class="row">
-
+      
+      <!-- cards in 1st column -->
       <div class="col text-center">
         <?php
         for ($i = 0; $i < 26; $i += 3) {
@@ -296,7 +325,7 @@ echo "<br /> after round 2, col-1 reshuffle:";
         }
         ?>
       </div>
-
+      <!-- cards in 2nd column -->
       <div class="col text-center">
         <?php
         for ($i = 1; $i < 26; $i += 3) {
@@ -332,10 +361,10 @@ echo "<br /> after round 2, col-1 reshuffle:";
             file_put_contents('playCards.txt', $cardSelect, FILE_APPEND);
           }
         }
-
         ?>
       </div>
 
+      <!-- cards in 3rd column -->
       <div class="col text-center">
         <?php
         for ($i = 2; $i <= 26; $i += 3) {
@@ -382,7 +411,7 @@ echo "<br /> after round 2, col-1 reshuffle:";
     <form name="pick_column" action="" method="post">
 
       <?php
-  
+
       if ($round == 2) {
         $value = '3';
       } elseif ($dealCards == true or $round == 1) {
@@ -396,7 +425,7 @@ echo "<br /> after round 2, col-1 reshuffle:";
 
       $display = 'd-none'; // to not display the buttons until ready
 
-      if ($dealCards == true or $round == 1 or $round == 2) {
+      if ($dealCards == true or $round == 2 or $round == 3) {
         $display = '';
       }
 
