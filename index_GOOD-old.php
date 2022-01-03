@@ -14,9 +14,77 @@ Instructor: Brad Best
 
 <?php
 
-include "trick/variables.php";
-include "trick/show_beginning.php";  // for testing, to follow along
+$card_deck = [
+  'club_01_A.png', 'club_02.png', 'club_03.png', 'club_04.png', 'club_05.png', 'club_06.png', 'club_07.png', 'club_08.png', 'club_09.png', 'club_10_T.png', 'club_11_J.png', 'club_12_Q.png', 'club_13_K.png',
+
+  'diam_01_A.png', 'diam_02.png', 'diam_03.png', 'diam_04.png', 'diam_05.png', 'diam_06.png', 'diam_07.png', 'diam_08.png', 'diam_09.png', 'diam_10_T.png', 'diam_11_J.png', 'diam_12_Q.png', 'diam_13_K.png',
+
+  'hart_01_A.png', 'hart_02.png', 'hart_03.png', 'hart_04.png', 'hart_05.png', 'hart_06.png', 'hart_07.png', 'hart_08.png', 'hart_09.png', 'hart_10_T.png', 'hart_11_J.png', 'hart_12_Q.png', 'hart_13_K.png',
+
+  'spad_01_A.png', 'spad_02.png', 'spad_03.png', 'spad_04.png', 'spad_05.png', 'spad_06.png', 'spad_07.png', 'spad_08.png', 'spad_09.png', 'spad_10_T.png', 'spad_11_J.png', 'spad_12_Q.png', 'spad_13_K.png'
+];
+
+$dealCards = $_POST['deal_cards'] ?? false; //prevents displaying cards until ready
+$shuffleCards = $_POST['shuffle_cards'] ?? false;  //waits displaying cards until ready
+$column = $_POST['column'] ?? 0; // what col is the card in
+$round = $_POST['round'] ?? 0; // which round is it
+
+echo "from the top - var dealCards: ";
+var_dump($dealCards);
+echo "<br />";
+echo "from the top - var shuffleCards: ";
+var_dump($shuffleCards);
+echo "<br />";
+echo "from the top - var column: ";
+var_dump($column);
+echo "<br />";
+echo "from the top - var round: ";
+var_dump($round);
+echo "<br />";
+
+$cardPath = 'images/cards/';
+
+$numbers = range(0, 8); // number of cards in column
+$cardColumn1 = array(); // will be column of cards
+$cardColumn2 = array();
+$cardColumn3 = array();
+$playingCards = array(); //deck of cards to play with
+$roundValue = array(); // control round of chance
+
+echo "<br />";
+echo "from the top - col 1: ";
+print_r($cardColumn1);
+
+echo "<br />";
+echo "from the top - col 2: ";
+print_r($cardColumn2);
+
+echo "<br />";
+echo "from the top - col 3: ";
+print_r($cardColumn3);
+
+echo "<br />";
+echo "from the top - playingCards: ";
+print_r($playingCards);
+echo "<br />";
+
+
 include "trick/shuffle_start.php";
+
+// if ($shuffleCards) {
+//   shuffle($card_deck); // shuffles the deck of cards when ready to play
+//   $numb = range(0, 26); // number of cards in the playing deck
+
+//   foreach ($numb as $deck) {
+//     $playingCards[] = $card_deck[$deck];
+//   }
+
+//   echo "<br />";
+//   echo "after shuffle - playingCards: ";
+//   print_r($playingCards);
+//   echo "<br />";
+// }
+
 
 if ($round == 4) {
   $cardMagic = file_get_contents('playcards03.txt');
@@ -216,7 +284,27 @@ if ($round == 3) {
   }
 }
 
-include "trick/show_currentValues.php"; // for testing, to follow along
+echo "<br />";
+echo "CURRENT PHP  - var column: ";
+var_dump($column);
+echo "<br />";
+echo "CURRENT PHP  - var round: ";
+var_dump($round);
+echo "<br />";
+
+echo "<br />CURRENT PHP col01: ";
+print_r($cardColumn1);
+
+echo "<br />CURRENT PHP col02: ";
+print_r($cardColumn2);
+
+echo "<br />CURRENT PHP col02: ";
+print_r($cardColumn3);
+echo "<br />";
+
+echo "<br />CURRENT PHP contents playingCards: ";
+print_r($playingCards);
+echo "<br />";
 
 ?>
 
@@ -376,6 +464,8 @@ include "trick/show_currentValues.php"; // for testing, to follow along
 
     </div> <!-- row end displaying cards -->
 
+
+
     <form name="pick_column" action="" method="post">
 
       <?php
@@ -413,10 +503,42 @@ include "trick/show_currentValues.php"; // for testing, to follow along
         </div>
       </div>
       <br>
+      <?php
+
+      echo "at bottom end - var dealCards: ";
+      var_dump($dealCards);
+      echo "<br />";
+      echo "at bottom end - var shuffleCards: ";
+      var_dump($shuffleCards);
+      echo "<br />";
+      echo "at bottom end - var column: ";
+      var_dump($column);
+      echo "<br />";
+      echo "at bottom end - var round: ";
+      var_dump($round);
+      echo "<br />";
+
+      echo "<br />";
+      echo "at bottom end - col 1: ";
+      print_r($cardColumn1);
+      echo "<br />";
+      echo "<br />";
+      echo "at bottom end - col 2: ";
+      print_r($cardColumn2);
+      echo "<br />";
+      echo "<br />";
+      echo "at bottom end - col 3: ";
+      print_r($cardColumn3);
+      echo "<br />";
+      echo "<br />";
+      echo "<p>at bottom end - playingCards: ";
+      print_r($playingCards);
+      echo "<br />";
+
+      ?>
     </form>
+
     <br>
-    
-    <?php include "trick/show_end.php"; ?> <!-- for testing, to follow along -->
 
   </div>
 

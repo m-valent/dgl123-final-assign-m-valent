@@ -83,3 +83,20 @@ if($round == 2) {
   //   $playingCards[$card + 9] = $cardColumn2[$card];
   //   $playingCards[$card + 18] = $cardColumn3[$card];
   // }
+
+
+  elseif ($round == 3) {
+            echo "<img src='" . $cardPath . $playingCards[$i] . "'>";
+            $cardColumn1[] = $playingCards[$i];
+          } elseif ($round == 2) {
+            // echo "Round two pick!";
+            echo "<img src='" . $cardPath . $playingCards[$i] . "'>";
+            $cardColumn1[] = $playingCards[$i];
+          } elseif ($dealCards) {
+            // echo "<img src='" . $cardPath . $cardColumn1[$i] . "'>";
+            echo "<img src='" . $cardPath . $playingCards[$i] . "'>";
+            $cardColumn1[] = $playingCards[$i];
+          } else {
+            // echo "<img src='images/cards/cover_black.png'>";
+          }
+        }
