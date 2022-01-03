@@ -9,7 +9,7 @@ if ($shuffleCards) {
     }
   
     echo "<br />";
-    echo "after shuffle - playingCards: ";
+    echo "AFTER first shuffle and deal playingCards: ";
     print_r($playingCards);
     echo "<br />";
   }

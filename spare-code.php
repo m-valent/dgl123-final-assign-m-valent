@@ -100,3 +100,56 @@ if($round == 2) {
             // echo "<img src='images/cards/cover_black.png'>";
           }
         }
+
+
+
+        if ($round == 4) {
+  $cardMagic = file_get_contents('playcards03.txt');
+  $playingCards = explode("\n", $cardMagic);
+  // bring in the deck of playing cards
+
+  echo "<br />";
+  echo "BEGIN round 4 - var column: ";
+  var_dump($column);
+  echo "<br />";
+  echo "BEGIN round 4 - var round: ";
+  var_dump($round);
+
+  echo "<br />BEGIN round 4 contents playingCards: ";
+  print_r($playingCards);
+  echo "<br />";
+
+  if ($column == 3) {
+    $cardColumn1 = array_slice($playingCards, 2, 1);
+    $cardColumn2 = array_slice($playingCards, 1, 1);
+    $cardColumn3 = array_slice($playingCards, 0, 1);
+
+    // this SHUFFLES playing cards into new card columns
+    for ($i = 0; $i <= 8; $i += 1) {
+      $cardColumn1[$i + 1] = $playingCards[$i + 3];
+      $cardColumn2[$i + 1] = $playingCards[$i + 12];
+      $cardColumn3[$i + 1] = $playingCards[$i + 19];
+    }
+
+    $playingCards = array_replace($cardColumn1);
+    // this places playing cards into new card deck
+    foreach ($numbers as $card) {
+      $playingCards[$card + 9] = $cardColumn2[$card];
+      $playingCards[$card + 18] = $cardColumn3[$card];
+    }
+
+    echo "<br /> after round 4, col-3 reshuffle:";
+    print_r($playingCards);
+    echo "<br />";
+  }
+}
+
+if ($round >= 2) {
+            echo "<img src='" . $cardPath . $playingCards[$i] . "'>";
+            $cardColumn2[] = $playingCards[$i];
+          } elseif ($dealCards) {
+            echo "<img src='" . $cardPath . $playingCards[$i] . "'>";
+            $cardColumn2[] = $playingCards[$i];
+          } else {
+            // echo "<img src='images/cards/cover_red.png'>";
+          }
