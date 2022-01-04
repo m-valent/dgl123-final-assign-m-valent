@@ -13,10 +13,10 @@ echo "from the top - var round: ";
 var_dump($round);
 echo "<br />";
 
-echo "<br />";
-echo "from the top - CARD DECK: ";
-print_r($card_deck);
-echo "<br />";
+// echo "<br />";
+// echo "from the top - CARD DECK: ";
+// print_r($card_deck);
+// echo "<br />";
 
 echo "<br />";
 echo "from the top - col 1: ";
