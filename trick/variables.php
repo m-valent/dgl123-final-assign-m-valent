@@ -24,4 +24,6 @@
     $playingCards = array(); //deck of cards to play with
     $roundValue = array(); // control round of chance
 
+    $magicCard = array(); // the player's CARD
+
   ?>
