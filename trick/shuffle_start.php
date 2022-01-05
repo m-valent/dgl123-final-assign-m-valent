@@ -8,9 +8,9 @@ if ($shuffleCards) {
       $playingCards[] = $card_deck[$deck];
     }
   
-    echo "<br />";
-    echo "AFTER first shuffle and deal playingCards: ";
-    print_r($playingCards);
-    echo "<br />";
+    // echo "<br />";
+    // echo "AFTER first shuffle and deal playingCards: ";
+    // print_r($playingCards);
+    // echo "<br />";
   }
   ?>

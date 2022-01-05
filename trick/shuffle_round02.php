@@ -14,9 +14,9 @@
         $playingCards[$card + 18] = $cardColumn3[$card];
       }
 
-    echo "<br />AFTER round 2, col-03 reshuffle: ";
-    print_r($playingCards);
-    echo "<br />";
+    // echo "<br />AFTER round 2, col-03 reshuffle: ";
+    // print_r($playingCards);
+    // echo "<br />";
 
   } elseif ($column == 2) {
     $cardColumn3 = array_slice($playingCards, 18, 9);
@@ -32,9 +32,9 @@
         $playingCards[$card + 18] = $cardColumn3[$card];
       }
 
-    echo "<br />AFTER round 2, col-02 reshuffle: ";
-    print_r($playingCards);
-    echo "<br />";
+    // echo "<br />AFTER round 2, col-02 reshuffle: ";
+    // print_r($playingCards);
+    // echo "<br />";
 
   } else {
     $cardColumn2 = array_slice($playingCards, 18, 9);
@@ -50,7 +50,7 @@
         $playingCards[$card + 18] = $cardColumn3[$card];
       }
 
-    echo "<br />AFTER round 2, col-01 reshuffle: ";
-    print_r($playingCards);
-    echo "<br />";
+    // echo "<br />AFTER round 2, col-01 reshuffle: ";
+    // print_r($playingCards);
+    // echo "<br />";
   }

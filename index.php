@@ -15,14 +15,22 @@ Instructor: Brad Best
 <?php
 
 include "trick/variables.php";
-include "inspect/show_beginning.php";  // for testing, to follow along
 include "trick/shuffle_start.php";
 
-// when starting out, this clears the .txt files, clean slate
+// when starting out or RESTARTING, this clears the .txt files, clean slate
 if ($dealCards && $shuffleCards) {
+
+  if (is_file('playCards.txt')) {
   unlink('playCards.txt');
-  unlink('playCards02.txt');
-  unlink('playCards03.txt');
+  }
+
+  if (is_file('playCards02.txt')) {
+    unlink('playCards02.txt');
+    }
+  
+    if (is_file('playCards03.txt')) {
+      unlink('playCards03.txt');
+      }
 }
 
 if ($round == 4){
@@ -31,9 +39,7 @@ if ($round == 4){
   $playingCards = explode("\n", $cardMagic);
   // bring in the deck of playing cards
 
-  include "inspect/show_round04.php";  // for testing, to follow along
   include "trick/shuffle_round04.php"; // reorganize the first 9 cards containing THE CARD
-
 
 } elseif ($round == 3) {
 
@@ -41,7 +47,6 @@ if ($round == 4){
   $playingCards = explode("\n", $cardMagic);
   // bring in the deck of playing cards
 
-  include "inspect/show_round03.php";  // for testing, to follow along
   include "trick/shuffle_round03.php"; // reorganize the first 9 cards containing THE CARD
 
 } elseif ($round == 2) {
@@ -50,12 +55,8 @@ if ($round == 4){
   $playingCards = explode("\n", $cardMagic);
   // bring in the deck of playing cards
 
-  include "inspect/show_round02.php";  // for testing, to follow along
   include "trick/shuffle_round02.php"; // track the column containing THE CARD
 }
-
-include "inspect/show_currentValues.php"; // for testing, to follow along
-
 ?>
 
 <head>
@@ -77,27 +78,36 @@ include "inspect/show_currentValues.php"; // for testing, to follow along
     <h3>Misko will guess your playing card!</h3>
     <p>Greetings, nothing in life is assured except death and taxes. Misko will attempt to guess what your playing card is and if correct you will owe him $1 Billion. Sound fair?</p>
 
+    <?php include "trick/display_instructions.php"; ?>
+
     <h3>Instructions:</h3>
     <ol>
-      <li>Click on the Shuffle & Deal button.</li>
-      <li>Once the cards are dealt, take a moment, pick a card and remember it. Don't touch the screen or hover the mouse over it, use your mind only!</li>
-      <li>When you have committed the card to memory, click on the button below the column in which your card is located. Please select correctly.</li>
-      <li>The cards will be re-dealt, find your card, and select the button below the column that your card is located in. Again select carefully.</li>
-      <li>One more time. After the cards are again re-dealt, please select and click the button below the column in which your card is located. Prepare for the review!</li>
+      <li class="<?php echo $show01; ?>">Click on the Shuffle & Deal button to start, or RESTART at anytime!</li>
+      <li class="<?php echo $show02; ?>">Once the cards are dealt, take a moment, pick a card and remember it. Don't hover the mouse over any cards, use only your mind!</li>
+      <li class="<?php echo $show02; ?>">When you have committed the card to memory, click on the button below the column in which your card is located. Please select correctly.</li>
+      <li class="<?php echo $show03; ?>">The cards will be re-dealt, find your card, and select the button below the column that your card is located in. Again select carefully.</li>
+      <li class="<?php echo $show04; ?>">One more time. After the cards are again re-dealt, please select and click the button below the column in which your card is located. Prepare for the review!</li>
     </ol>
 
     <form name="shuffle_button" action="" method="post">
       <input type="hidden" name="deal_cards" value="true">
-      <div class="text-right">
+      <div class="text-right <?php echo $showButton; ?>">
         <h6>By clicking this button,<br />you accept the challenge!</h6>
         <input type="hidden" name="round" value="1">
-
         <button type="submit" class="btn btn-primary" name="shuffle_cards" value="true">Shuffle & Deal the Cards</button>
+      </div>
+      <div class="text-right <?php echo $hide; ?>">
+        <h6>You can restart anytime!</h6>
+        <input type="hidden" name="round" value="1">
+        <button type="submit" class="btn btn-primary" name="shuffle_cards" value="true">Shuffle & Re-Deal</button>
       </div>
     </form>
     <hr>
   </div>
-  <div class="tableTop container">
+
+  <?php include "trick/display_cards.php"; // control the display ?>
+
+  <div class="tableTop container <?php echo $display; ?>">
 
     <br>
     <!-- displaying cards -->
@@ -229,15 +239,6 @@ include "inspect/show_currentValues.php"; // for testing, to follow along
 
       <input type="hidden" name="round" value="<?php echo $value; ?>">
 
-      <?php
-
-      $display = 'd-none'; // to not display the buttons until ready
-
-      if ($dealCards == true or $round >= 1) {
-        $display = '';
-      }
-
-      ?>
       <div class="row mt-2 <?php echo $display; ?>">
         <div class="col text-center">
           <button type="submit" class="btn btn-warning" name="column" value="1">Card is above</button>
@@ -255,15 +256,12 @@ include "inspect/show_currentValues.php"; // for testing, to follow along
     </form>
     <br>
 
-    <?php include "inspect/show_end.php"; ?> <!-- for testing, to follow along -->
-
-  </div>
+  </div> <!-- END Tabletop -->
 
   <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
   <script src="js/popper.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
-  <!-- in case I feel to style the page, 
-        if need be bootstrap 4.6 is something I am used to -->
+  <!-- in case I feel to style the page -->
 </body>
 
 </html>
