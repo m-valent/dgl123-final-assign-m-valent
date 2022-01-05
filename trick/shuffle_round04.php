@@ -14,8 +14,8 @@ array_push($magicCard, $playingCards[2]);
     
   }
 
-  echo "<br />The Player's CARD is: ";
-  print_r($magicCard);
-  echo "<br />";
+  // echo "<br />The Player's CARD is: ";
+  // print_r($magicCard);
+  // echo "<br />";
 
   ?>

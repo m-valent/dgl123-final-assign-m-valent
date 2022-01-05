@@ -74,13 +74,14 @@ if ($round == 4){
 
 <body>
   <div class="container">
-    <h1>Magic Card Trick</h1>
-    <h3>Misko will guess your playing card!</h3>
-    <p>Greetings, nothing in life is assured except death and taxes. Misko will attempt to guess what your playing card is and if correct you will owe him $1 Billion. Sound fair?</p>
-
     <?php include "trick/display_instructions.php"; ?>
 
-    <h3>Instructions:</h3>
+    <h1>Magic Card Trick</h1>
+    <h3 class="<?php echo $show; ?>">Misko will guess your playing card!</h3>
+    <h3 class="<?php echo $showCard; ?>">Misko will now reveal your card...</h3>
+    <p class="<?php echo $show; ?>">Greetings, nothing in life is assured except death and taxes. Misko will attempt to guess what your playing card is and if correct you will owe him $1 Billion. Sound fair?</p>
+
+    <h3 class="<?php echo $show; ?>">Instructions:</h3>
     <ol>
       <li class="<?php echo $show01; ?>">Click on the Shuffle & Deal button to start, or RESTART at anytime!</li>
       <li class="<?php echo $show02; ?>">Once the cards are dealt, take a moment, pick a card and remember it. Don't hover the mouse over any cards, use only your mind!</li>
@@ -89,20 +90,38 @@ if ($round == 4){
       <li class="<?php echo $show04; ?>">One more time. After the cards are again re-dealt, please select and click the button below the column in which your card is located. Prepare for the review!</li>
     </ol>
 
+    <div class="row">
+      <div class="reveal col text-center <?php echo $showCard; ?>">
+
+      <?php
+        echo "<img src='" . $cardPath . $magicCard[0] . "'>";
+      ?>
+
+      </div>
+    </div>
+
     <form name="shuffle_button" action="" method="post">
       <input type="hidden" name="deal_cards" value="true">
       <div class="text-right <?php echo $showButton; ?>">
         <h6>By clicking this button,<br />you accept the challenge!</h6>
         <input type="hidden" name="round" value="1">
         <button type="submit" class="btn btn-primary" name="shuffle_cards" value="true">Shuffle & Deal the Cards</button>
-      </div>
+      </div> <!-- button to start the trick -->
+
       <div class="text-right <?php echo $hide; ?>">
         <h6>You can restart anytime!</h6>
         <input type="hidden" name="round" value="1">
         <button type="submit" class="btn btn-primary" name="shuffle_cards" value="true">Shuffle & Re-Deal</button>
-      </div>
+      </div>  <!-- button to RE-start the trick -->
+
+      <div class="text-right <?php echo $showCard; ?>">
+        <h6>Would you like to try again?</h6>
+        <input type="hidden" name="round" value="1">
+        <button type="submit" class="btn btn-primary" name="shuffle_cards" value="true">Double or nothing!</button>
+      </div> <!-- button to try again -->
     </form>
-    <hr>
+    <hr class="<?php echo $show; ?>">
+
   </div>
 
   <?php include "trick/display_cards.php"; // control the display ?>

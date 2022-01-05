@@ -17,7 +17,12 @@ body {
 
 img {
     max-width: 80px;
-        max-height: 111px;
+    max-height: 111px;
+}
+
+.reveal img {
+    max-width: 320px;
+    max-height: 444px;
 }
 
 @media(min-width: 425px) {
@@ -31,6 +36,10 @@ img {
     img {
         max-width: 181px;
         max-height: 251px;
+    }
+    .reveal img {
+        max-width: 320px;
+        max-height: 444px;
     }
   }
 
