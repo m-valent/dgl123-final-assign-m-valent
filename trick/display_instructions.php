@@ -3,10 +3,11 @@
     $hide = 'd-none';
     $show = '';
     $show01 = '';
-    $show02 = '';
-    $show03 = '';
-    $show04 = '';
+    $show02 = 'd-none';
+    $show03 = 'd-none';
+    $show04 = 'd-none';
     $showCard ='d-none';
+    $question_counter ='d-none';
 
     if ($round == null) {
       $showButton = '';

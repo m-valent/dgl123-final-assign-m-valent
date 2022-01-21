@@ -16,6 +16,7 @@ Instructor: Brad Best
 
 include "trick/variables.php";
 include "trick/shuffle_start.php";
+include "php/counter_func.php";
 
 // when starting out or RESTARTING, this clears the .txt files, clean slate
 if ($dealCards && $shuffleCards) {
@@ -79,23 +80,70 @@ if ($round == 4){
     <h1>Magic Card Trick</h1>
     <h3 class="<?php echo $show; ?>">Misko will guess your playing card!</h3>
     <h3 class="<?php echo $showCard; ?>">Misko will now reveal your card...</h3>
-    <p class="<?php echo $show; ?>">Greetings, nothing in life is assured except death and taxes. Misko will attempt to guess what your playing card is and if correct you will owe him $1 Billion. Sound fair?</p>
+    <p class="<?php echo $show; ?>">Greetings, nothing in life is assured except death and taxes. Misko will attempt to guess what your playing card is and if correct you will owe him $1 Billion. Sound fair? Okay, just kidding!  Let's play for fun... see if I can guess your card.</p>
 
     <h3 class="<?php echo $show; ?>">Instructions:</h3>
     <ol>
-      <li class="<?php echo $show01; ?>">Click on the Shuffle & Deal button to start, or RESTART at anytime!</li>
-      <li class="<?php echo $show02; ?>">Once the cards are dealt, take a moment, pick a card and remember it. Don't hover the mouse over any cards, use only your mind!</li>
-      <li class="<?php echo $show02; ?>">When you have committed the card to memory, click on the button below the column in which your card is located. Please select correctly.</li>
-      <li class="<?php echo $show03; ?>">The cards will be re-dealt, find your card, and select the button below the column that your card is located in. Again select carefully.</li>
-      <li class="<?php echo $show04; ?>">One more time. After the cards are again re-dealt, please select and click the button below the column in which your card is located. Prepare for the review!</li>
+      <li class="<?php echo $show01; ?>">Click on the Shuffle & Deal button to start, you will be allowed to RESTART at anytime if you so desire!</li>
+      <li class="<?php echo $show02; ?>">Now that the cards are dealt, take a moment, pick a card and remember it.  You may need to scroll up and down to see all the cards until you find your card of choice.</li>
+      <li class="<?php echo $show02; ?>">When you have committed YOUR CHOSEN card to memory, click on the button below the column in which your card is located. Please select correctly.</li>
+      <li class="<?php echo $show03; ?>">When The cards are re-dealt, find your card, and select the button below the column that your card is located in. Again select carefully.</li>
+      <li class="<?php echo $show04; ?>">One last time, please select and click the button below the column in which your card is located. Prepare for the reveal!</li>
     </ol>
 
     <div class="row">
       <div class="reveal col text-center <?php echo $showCard; ?>">
 
       <?php
+      if ($round == 4 && (!$correct && !$wrong)) {
+        $question_counter = '';
+        // echo  getCounter("reveals"); 
         echo "<img src='" . $cardPath . $magicCard[0] . "'>";
+        echo "<br />";
+        echo "<br />";
+
+        echo "Is this your card?";
+        echo "<br />";
+      }        
       ?>
+<br>
+            <form class="<?php echo $question_counter; ?>" name="reveal_correct" action="" method="post">
+              <!-- <input type="hidden" name="deal_cards" value="true"> -->
+              <input type="hidden" name="round" value="4">
+              <input type="hidden" name="card" value="<?php echo $magicCard[0]?>">
+
+              <div class="row">
+                <div class="col-sm text-center">
+                <button type="submit" class="btn btn-warning" name="correct_guess" value="true">OMG Yes!</button>
+                </div>
+                <div class="col-sm text-center">
+                <button type="submit" class="btn btn-warning" name="wrong_guess" value="true">LOL Nope!</button>
+                </div>
+              </div> <!-- asking if reveal was correct card -->
+            </form>
+
+
+          
+            <?php 
+            if ($correct) {
+              echo "<br />";
+              echo "<br />";
+              echo "Number of times reveal was correct!";
+              echo "<br />";
+
+              echo '<p class="display-4">';
+              echo getCounter("reveals");
+              
+            } elseif ($wrong) {
+              echo "<br />";
+              echo "<br />";
+              echo "So sorry to hear, please give me another chance.";
+              echo "<br />";
+              echo "<br />";
+            }
+          ?>
+          
+<br>
 
       </div>
     </div>
@@ -282,5 +330,12 @@ if ($round == 4){
   <script src="js/bootstrap.min.js"></script>
   <!-- in case I feel to style the page -->
 </body>
+
+<footer>
+<div class="container text-center pt-5">
+<h6>This card trick is brought to you by <a target="blank" href="https://miskodjs.ca">MiškoDJs</a></h6>
+<h6>&copy; 2022 - Wulfgaar Media</h6>
+</div>
+</footer>
 
 </html>

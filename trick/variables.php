@@ -14,6 +14,9 @@
     $shuffleCards = $_POST['shuffle_cards'] ?? false;  //waits displaying cards until ready
     $column = $_POST['column'] ?? 0; // what col is the card in
     $round = $_POST['round'] ?? 0; // which round is it
+    $correct = $_POST['correct_guess'] ?? false; // to count when revealed card is correct
+    $wrong = $_POST['wrong_guess'] ?? false; // when reveal is "wrong", error on person not this lol
+    $magicCard[0] = $_POST['card'] ?? false; // when card is known
 
     $cardPath = 'images/cards/'; // path to image folder of cards
 
@@ -25,5 +28,6 @@
     $roundValue = array(); // control round of chance
 
     $magicCard = array(); // the player's CARD
+    $numVisitors = array(); // success counter
 
   ?>
